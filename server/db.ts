@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { eq, count } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { InsertChatMessage, InsertUser, chatMessages, userProfiles, users } from "../drizzle/schema";
@@ -171,5 +171,26 @@ export async function saveChatMessage(userId: number, sender: "user" | "assistan
     });
   } catch (error) {
     console.error("[Database] Failed to save chat message:", error);
+  }
+}
+
+/**
+ * Get aggregate statistics for the landing page
+ */
+export async function getGlobalStats() {
+  const db = await getDb();
+  if (!db) return { totalStudents: 0, totalMessages: 0 };
+
+  try {
+    const [userCount] = await db.select({ value: count() }).from(users);
+    const [messageCount] = await db.select({ value: count() }).from(chatMessages);
+
+    return {
+      totalStudents: Number(userCount?.value ?? 0),
+      totalMessages: Number(messageCount?.value ?? 0),
+    };
+  } catch (error) {
+    console.error("[Database] Failed to fetch global stats:", error);
+    return { totalStudents: 0, totalMessages: 0 };
   }
 }

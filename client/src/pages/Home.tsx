@@ -11,6 +11,8 @@ import {
   Zap,
   ArrowRight,
 } from "lucide-react";
+import { trpc } from "@/lib/trpc";
+
 
 /**
  * MTIS Assistant — Landing / Home Page
@@ -70,13 +72,24 @@ const BENEFITS = [
   },
 ] as const;
 
-const STATS = [
-  { value: "50k+", label: "Active Students" },
-  { value: "4,281", label: "Daily Interactions" },
-  { value: "24/7", label: "Support Available" },
-] as const;
-
 export default function Home() {
+  const { data: stats, isLoading } = trpc.getStats.useQuery();
+
+  const activeStats = [
+    { 
+      value: isLoading ? "..." : (stats?.totalStudents ?? 1000).toLocaleString() + "+", 
+      label: "Active Students" 
+    },
+    { 
+      value: isLoading ? "..." : (stats?.totalMessages ?? 0).toLocaleString(), 
+      label: "Daily Interactions" 
+    },
+    { 
+      value: "24/7", 
+      label: "Support Available" 
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* ── 1. Navigation ─────────────────────────────── */}
@@ -90,15 +103,26 @@ export default function Home() {
         >
           <div className="container">
             <div className="max-w-3xl">
+              {/* Floating Badge */}
+              <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-white/50 px-3 py-1 backdrop-blur-sm shadow-sm">
+                <span className="text-xs font-bold tracking-widest text-black uppercase">
+                  INTELLIGENCE FOR ACADEMIA
+                </span>
+              </div>
+
               <h1
                 id="hero-heading"
-                className="text-5xl md:text-6xl font-bold text-primary mb-6 leading-tight"
+                className="text-6xl md:text-7xl font-extrabold text-black mb-6 leading-tight"
               >
-                AI-Powered Campus Intelligence
+                YOUR AI<br />
+                Assistant for<br />
+                Everything at<br />
+                University
               </h1>
-              <p className="text-xl text-foreground/80 mb-8 leading-relaxed">
-                Intelligent university support across chat, email, WhatsApp, and
-                voice. Instant answers, smart routing, and verified accuracy.
+              <p className="text-xl text-foreground/80 mb-8 leading-relaxed max-w-2xl bg-white/30 backdrop-blur-sm rounded-xl p-2 -ml-2">
+                Your all-in-one companion for university life. From checking your current GPA and academic progress 
+                to finding campus locations and getting instant answers to your inquiries – our AI-powered assistant 
+                is here to help you succeed every step of the way.
               </p>
 
               {/* CTA Buttons */}
@@ -123,7 +147,7 @@ export default function Home() {
 
               {/* Stats */}
               <div className="flex flex-wrap gap-8 sm:gap-12 mt-12 pt-8 border-t border-border">
-                {STATS.map(({ value, label }) => (
+                {activeStats.map(({ value, label }) => (
                   <div key={label}>
                     <p className="text-3xl font-bold text-primary">{value}</p>
                     <p className="text-sm text-foreground/60 mt-0.5">{label}</p>

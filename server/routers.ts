@@ -3,12 +3,15 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { loginUser, getStudentProfile } from "./db";
+import { loginUser, getStudentProfile, getGlobalStats } from "./db";
 import { aiRouter } from "./aiRouter";
 import { sdk } from "./_core/sdk";
 
 export const appRouter = router({
   system: systemRouter,
+  getStats: publicProcedure.query(async () => {
+    return await getGlobalStats();
+  }),
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     login: publicProcedure

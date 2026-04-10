@@ -1,8 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Google Fonts: Playfair Display (serif) and Inter (sans-serif) */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap');
+/* Google Fonts: Outfit (headings) and Inter (body) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -46,41 +46,40 @@
 }
 
 :root {
-  /* Professional Corporate Design System */
-  /* Primary: Dark Blue (#003366), Accent: Professional Blue (#0066CC) */
-  --primary: #003366;
+  /* Brand-specific Color Palette */
+  --primary: #00236F;
   --primary-foreground: #FFFFFF;
-  --sidebar-primary: #003366;
+  --sidebar-primary: #00236F;
   --sidebar-primary-foreground: #FFFFFF;
-  --chart-1: #0066CC;
-  --chart-2: #004C99;
-  --chart-3: #003366;
-  --chart-4: #1A4D80;
-  --chart-5: #336699;
-  --radius: 0.5rem;
-  --background: #F5F7FA;
-  --foreground: #1A1A1A;
+  --chart-1: #9333EA;
+  --chart-2: #94A3B8;
+  --chart-3: #64A8FE;
+  --chart-4: #90A8FF;
+  --chart-5: #1E3A8A;
+  --radius: 0.75rem;
+  --background: #FFFFFF;
+  --foreground: #191C1E;
   --card: #FFFFFF;
-  --card-foreground: #1A1A1A;
+  --card-foreground: #191C1E;
   --popover: #FFFFFF;
-  --popover-foreground: #1A1A1A;
-  --secondary: #0066CC;
+  --popover-foreground: #191C1E;
+  --secondary: #1E3A8A;
   --secondary-foreground: #FFFFFF;
-  --muted: #D9E2ED;
-  --muted-foreground: #666666;
-  --accent: #0066CC;
+  --muted: #DCE1FF;
+  --muted-foreground: #444651;
+  --accent: #1E3A8A;
   --accent-foreground: #FFFFFF;
   --destructive: #CC3333;
   --destructive-foreground: #FFFFFF;
-  --border: #D9E2ED;
+  --border: #DCE1FF;
   --input: #FFFFFF;
-  --ring: #0066CC;
+  --ring: #1E3A8A;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #1A1A1A;
-  --sidebar-accent: #0066CC;
+  --sidebar-foreground: #191C1E;
+  --sidebar-accent: #1E3A8A;
   --sidebar-accent-foreground: #FFFFFF;
-  --sidebar-border: #D9E2ED;
-  --sidebar-ring: #0066CC;
+  --sidebar-border: #DCE1FF;
+  --sidebar-ring: #1E3A8A;
 }
 
 .dark {
